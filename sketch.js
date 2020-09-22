@@ -69,10 +69,13 @@ function preload() {
     help_grid = loadImage("assets/help_grid.png");
     help_button = loadImage("assets/help_button.png");
 
-    //music loads (gb_[0,1,2,3] are load in the Cube class)
+    //music loads 
     soundFormats('mp3', 'ogg');
     sfx_floorhit = loadSound("assets/audio/floorhit");
-
+    //fake load (gb_[0,1,2,3] are load again in the Cube class)
+    for (var i = 0; i < 4; i++) {
+        loadSound("assets/audio/gc_" + i);
+    }
 }
 
 function setup() {
@@ -89,12 +92,12 @@ function draw() {
     }
 
     //cubes and trails. Put all in the same loop for Z ordening
-    // for (let i = 0; i < cubes.length; i++) {
-    //     cubes[i].drawTrail();
-    // }
-    mouseisOver_cube = false;
     for (let i = 0; i < cubes.length; i++) {
         cubes[i].drawTrail();
+    }
+    mouseisOver_cube = false;
+    for (let i = 0; i < cubes.length; i++) {
+        // cubes[i].drawTrail();
         cubes[i].display();
 
         if (mouseX > cubes[i].x-hitbox &&
